@@ -38,6 +38,7 @@
   <div class="container">
     <div class="row" style="margin-top: 5%">
       <h3>EE Word Counter</h3>
+      <h7><i>By James Grace</i></h7>
       <p>Copy and paste your work into the text box below and select what you want to count in your word count:</p>
 
     </div>
@@ -45,32 +46,28 @@
         <textarea class="u-full-width " placeholder="Your essay goes here ..." id="essay" style="resize: none;"></textarea>
     </div>
     <div class="row">
-      <p>Type in the heading names (excluding bibliography and contents):</p>
-      <textarea class="u-full-width " placeholder="Type ..." id="headings" style="resize: none;"></textarea>
+      <p>Type in the heading names (including bibliography and contents):</p>
+      <textarea class="u-full-width " placeholder="Please separate with a comma ..." id="headings" style="resize: none;"></textarea>
     </div>
     <div class="row">
       <label>
-        <input type="checkbox">
+        <input id="incQuot" type="checkbox">
         <span class="label-body">Include quotations</span>
       </label>
       <label>
-        <input type="checkbox">
+        <input id="incCit" type="checkbox">
         <span class="label-body">Include in-text citations</span>
       </label>
-      <label>
-        <input type="checkbox">
-        <span class="label-body">Exclude contents page</span>
-      </label>
-      <label>
-        <input type="checkbox">
-        <span class="label-body">Exclude bibliography</span>
-      </label>
+
+    </div>
+    <div class="row">
+      <p>hi</p>
+      <div id="output" style="color: red;"></div>
+      <h6><b>Total Word Count:</b></h6>
+    </div>
+    <div class="row">
       <button id="check" class="button-primary">Analyse your essay</button>
     </div>
-  </div>
-  <div class="row">
-    <p>hi</p>
-    <div id="output" style="color: red;"></div>
 
   </div>
 
@@ -78,8 +75,18 @@
     import pyodide
 
     def on_click(e):
-      d = document.getElementById("essay")
-      document.getElementById("output").innerHTML = e.target.innerHTML
+      text = document.getElementById("essay").value
+
+      # get headings
+      rawHeadings = document.getElementById("headings").value
+      headings = rawHeadings.split(",")
+
+      # get content in bibliography area
+
+      document.getElementById("output").innerHTML = document.getElementById("incQuot").checked
+
+
+
 
     button = document.getElementById("check")
     button.addEventListener("click", pyodide.create_proxy(on_click))
