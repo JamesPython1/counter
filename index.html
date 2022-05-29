@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Your page title here :)</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+
+  <!-- JS -->
+  <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row" style="margin-top: 5%">
+      <h3>EE Word Counter</h3>
+      <p>Copy and paste your work into the text box below and select what you want to count in your word count:</p>
+
+    </div>
+    <div class="row">
+        <textarea class="u-full-width " placeholder="Your essay goes here ..." id="essay" style="resize: none;"></textarea>
+    </div>
+    <div class="row">
+      <p>Type in the heading names (excluding bibliography and contents):</p>
+      <textarea class="u-full-width " placeholder="Type ..." id="headings" style="resize: none;"></textarea>
+    </div>
+    <div class="row">
+      <label>
+        <input type="checkbox">
+        <span class="label-body">Include quotations</span>
+      </label>
+      <label>
+        <input type="checkbox">
+        <span class="label-body">Include in-text citations</span>
+      </label>
+      <label>
+        <input type="checkbox">
+        <span class="label-body">Exclude contents page</span>
+      </label>
+      <label>
+        <input type="checkbox">
+        <span class="label-body">Exclude bibliography</span>
+      </label>
+      <button id="check" class="button-primary">Analyse your essay</button>
+    </div>
+  </div>
+  <div class="row">
+    <p>hi</p>
+    <div id="output" style="color: red;"></div>
+
+  </div>
+
+  <py-script>
+    import pyodide
+
+    def on_click(e):
+      d = document.getElementById("essay")
+      document.getElementById("output").innerHTML = e.target.innerHTML
+
+    button = document.getElementById("check")
+    button.addEventListener("click", pyodide.create_proxy(on_click))
+  </py-script>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
